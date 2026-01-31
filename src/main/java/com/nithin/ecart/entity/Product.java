@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "products")
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class Product {
     @Id
@@ -48,4 +48,14 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "product_id")
     private List<ProductReview> reviews;
+
+    public Product(Long id, String name, Double price, String description, Double ratings, String seller, Integer stock) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.ratings = ratings;
+        this.seller = seller;
+        this.stock = stock;
+    }
 }
