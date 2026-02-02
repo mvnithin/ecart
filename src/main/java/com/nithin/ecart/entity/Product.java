@@ -31,6 +31,8 @@ public class Product {
     @NotBlank(message = "Description Field is Required")
     private String description;
 
+    private String category;
+
     private Double ratings=0.0;
 
     @NotBlank(message = "Seller Field is Required")
@@ -49,11 +51,12 @@ public class Product {
     @JoinColumn(name = "product_id")
     private List<ProductReview> reviews;
 
-    public Product(Long id, String name, Double price, String description, Double ratings, String seller, Integer stock) {
+    public Product(Long id, String name, Double price, String description,String category ,Double ratings, String seller, Integer stock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.category=category;
         this.ratings = ratings;
         this.seller = seller;
         this.stock = stock;
