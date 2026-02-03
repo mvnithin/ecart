@@ -49,4 +49,7 @@ public class OrderService {
        orderRepo.save(order);
        return new OrderCreated(refId);
     }
+    public Order getOrder(String refId){
+        return orderRepo.findByReferenceId(refId).orElseThrow(()->new RuntimeException("Order Not Found"));
+    }
 }
