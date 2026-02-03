@@ -2,9 +2,11 @@ package com.nithin.ecart.service;
 
 import com.nithin.ecart.entity.Product;
 import com.nithin.ecart.repository.ProductRepository;
+import com.nithin.ecart.spec.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 
@@ -30,5 +32,10 @@ public class ProductService {
 
     public Product getProductById(Long id){
         return productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found with Id: "+id));
+    }
+
+    public List<Product> searchProducts(String category,Double minPrice,Double maxPrice,String Keyword){
+        Specification<Product>spec=Specification.where(ProductSpecification.hasCategory(category));
+        return productRepository.findAll(spec);
     }
 }
