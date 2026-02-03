@@ -11,7 +11,7 @@ public class ProductSpecification {
         return (root, query, cb) -> {
             if(min==null && max==null) return null;
             if(min==null) return cb.lessThanOrEqualTo(root.get("price"),max);
-            if(max==null) return cb.lessThanOrEqualTo(root.get("price"),min);
+            if(max==null) return cb.greaterThanOrEqualTo(root.get("price"),min);
             return cb.between(root.get("price"),min,max);
         };
     }
@@ -25,6 +25,14 @@ public class ProductSpecification {
             );
         };
     }
+
+    public static Specification<Product> ratingsGreaterThan(Double ratings){
+        return (root, query, cb) -> {
+            if(ratings==null) return null;
+            return cb.greaterThanOrEqualTo(root.get("ratings"),ratings);
+        };
+    }
+
 
 
 }
