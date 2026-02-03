@@ -1,7 +1,10 @@
 package com.nithin.ecart.service;
 
+import com.nithin.ecart.dto.ProductReviewDto;
 import com.nithin.ecart.entity.Product;
+import com.nithin.ecart.entity.ProductReview;
 import com.nithin.ecart.repository.ProductRepository;
+import com.nithin.ecart.repository.ProductReviewRepository;
 import com.nithin.ecart.spec.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,9 @@ import java.util.Map;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductReviewRepository productReviewRepository;
 
     public Map<String,Object> getAllProduct(int page, int size){
         Pageable pageable= PageRequest.of(page,size);
@@ -42,4 +48,14 @@ public class ProductService {
 
         return productRepository.findAll(spec);
     }
+
+    public void addReview(ProductReviewDto reviewDto){
+    Product product = productRepository.findById(reviewDto.getProductId()).orElseThrow(()->new RuntimeException("Product Not Found"));
+    ProductReview review=new ProductReview();
+    review.setComment(reviewDto.getComment());
+    review.setRating(reviewDto.getRating());
+    review.setProduct(product);
+    productReviewRepository.save(review);
+    }
+
 }
