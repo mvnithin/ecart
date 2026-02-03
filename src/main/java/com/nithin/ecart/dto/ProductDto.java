@@ -20,7 +20,7 @@ public class ProductDto {
     private String seller;
     private Integer stock;
     private Integer numOfReviews=0;
-    private List<ProductImage> images;
+    private List<ProductImageDto> images;
     private List<ProductReviewDto> reviews;
 
     public void Product(Long id, String name, Double price, String description,String category ,Double ratings, String seller, Integer stock) {

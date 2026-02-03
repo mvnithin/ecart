@@ -1,6 +1,7 @@
 package com.nithin.ecart.service;
 
 import com.nithin.ecart.dto.ProductDto;
+import com.nithin.ecart.dto.ProductImageDto;
 import com.nithin.ecart.dto.ProductReviewDto;
 import com.nithin.ecart.entity.Product;
 import com.nithin.ecart.entity.ProductReview;
@@ -62,6 +63,12 @@ public class ProductService {
 
       dto.setReviews(reviewDtos);
 
+        List<ProductImageDto>  imageDtos = product.getImages().stream().map(image -> {
+            ProductImageDto imageDto = new ProductImageDto(image.getPublicId());
+            return imageDto;
+        }).collect(Collectors.toList());
+
+        dto.setImages(imageDtos);
         return dto;
     }
 
